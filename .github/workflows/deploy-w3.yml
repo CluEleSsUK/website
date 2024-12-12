@@ -22,7 +22,7 @@ jobs:
       - name: Update IPNS link
         uses: filecoin-station/w3name-update-action@v0
         with:
-          value: ${{ steps.w3up.outputs.cid }}
+          value: /ipfs/${{ steps.w3up.outputs.cid }}
           private-key: ${{ secrets.IPNI_SECRET_KEY_HEX }}
           revision: ${{ secrets.IPNI_REVISION_HEX }}
 
