@@ -1,0 +1,26 @@
+name: deploy-w3
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  deploy-site:
+    runs-on: ["ubuntu-latest"]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Push site to web3 storage
+        uses: web3-storage/add-to-web3@v3.0.0
+        id: w3up
+        with:
+          path_to_add: "index.html"
+          secret_key: ${{ secrets.W3_PRINCIPAL }}
+          proof: ${{ secrets.W3_PROOF }}
+
+      - name: Print CID
+        run: echo ${{ steps.w3up.outputs.cid }}
+
+      - name: Print URL
+        run: echo ${{ steps.w3up.outputs.url }}
